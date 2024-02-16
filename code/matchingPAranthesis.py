@@ -7,44 +7,28 @@
 
 
 def matchp(s):
-    # valids=["(","[","{"]
-    # validclose=[")","]","}"]
-    # rtn=False
-    # for index, c in enumerate(s):
-    #     # if its open char then get its index from valid
-    #     if c in valids:
-    #         ind=valids.index(c)
-    #         # get closing paranthesis for that element from validclose
-    #         if (  len(s) > index + 1):
-    #             if(validclose[ind] == s[index + 1]):
-    #                rtn=True
-    #             else:
-    #               rtn=False
-
-    # since we should do positional test lets do stack  and test whats at top of stack as soon as we see  closing then we pop that of if closing is as expected
-    # in end stack should be empty
     myStack = []
-
+    resp=False
+    pairs = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
+    }
 
     for  c in s :
         if c in ["(","[","{"]:
             myStack.append(c)
+        elif len(myStack) == 0 or c != pairs[myStack.pop()]:
+               return False
 
-        print(f"stack is {myStack} ")
-        if c in "]":
-            if(myStack.pop() == "["):
-                pass
+    return len(myStack) == 0
 
-        if c in ")":
-           if (myStack.pop() == "("):
-             pass
-        if c in "}":
-            if (myStack.pop() == "{"):
-                 pass
-    if(myStack ==[]) :
-        return True
-    else:
-        return False
+
+
+
+
+
+
 
 
 
@@ -58,4 +42,4 @@ def matchp(s):
 if __name__ == '__main__':
     #print(matchp("(){}[]"))
     #print(matchp("()[{}]"))
-    print(matchp("(]"))
+    print(matchp("( [ ) ]"))
